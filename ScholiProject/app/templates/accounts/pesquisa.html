@@ -1,0 +1,45 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+{% if q %}
+<h4 class="text-center">OAs contendo "{{ q }}"</h4>
+<p class="text-center">
+    {% with results.count as total_results %}
+    Encontrados {{total_results}} Resultados
+    {% endwith %}
+</p>
+<div class="card-columns listrecent">
+
+		<!-- begin post -->
+		{% for objetos in results %}
+		<div class ="row">
+			<div class ="col-sm-12">
+				<div class="card" style="height: 22rem">
+					<a href="/view/{{objetos.id}}/">
+						<img class="img-fluid" src="{{objetos.imagem.url}}" style="height: 13rem" alt="">
+					</a>
+					<div class="card-block">
+						<h2 class="card-title">
+							<a href="/view/{{objetos.id}}/">{{objetos.titulo|truncatechars:90}}</a>
+						</h2>
+						<div class="after-post-tags">
+							<ul class="tags">
+								{% for tag in objetos.tags.all %}
+								<li><a>{{tag.nametag}}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+                {% empty %}
+                <p class="text-center">Não há resultados para a sua pesquisa.</p>
+                {% endfor %}
+			</div>
+		</div>
+		<!-- end post -->
+	</div>
+	</section>
+</div>
+
+{% endif %}
+{% endblock %}

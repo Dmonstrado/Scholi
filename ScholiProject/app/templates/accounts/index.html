@@ -1,0 +1,50 @@
+{% extends 'accounts/main.html' %}
+{% block content %}
+<!-- Begin Site Title
+================================================== -->
+<div class="container">
+	<div class="mainheading">
+		<h1 class="sitetitle">Scholi</h1>
+		<p class="lead">
+			 Juntando conhecimento prático de forma prática.
+		</p>
+	</div>
+<!-- End Site Title
+================================================== -->
+	<!-- Begin List Posts
+	================================================== -->
+	<section class="recent-posts">
+	<div class="section-title">
+		<h2><span>Objetos de Aprendizado</span></h2>
+	</div>
+	<div class="card-columns listrecent">
+
+		<!-- begin post -->
+		{% for i in objetos %}
+		<div class ="row">
+			<div class ="col-sm-12">
+				<div class="card" style="height: 22rem">
+					<a href="/view/{{i.id}}/">
+						<img class="img-fluid" src="{{i.imagem.url}}" style="height: 13rem" alt="">
+					</a>
+					<div class="card-block">
+						<h2 class="card-title"><a href="/view/{{i.id}}/">{{i.titulo|truncatechars:60}}</a></h2>
+						<div class="after-post-tags">
+							<ul class="tags">
+								{% for tag in i.tags.all %}
+								<li><a>{{tag.nametag}}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+		<!-- end post -->
+	</div>
+	</section>
+	<!-- End List Posts
+	================================================== -->
+</div>
+{% endblock %}

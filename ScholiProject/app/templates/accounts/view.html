@@ -1,0 +1,36 @@
+{% extends 'accounts/main.html' %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static '/css/view.css'%}">
+    <div class="col-8 m-auto pt-4 pb-4 text-center" id="divMain">
+        <div class="HeadOA" id="HeadOA">
+            <h4 class="tituloOA"><strong>{{db.titulo}}</strong></h4>
+            {% if request.user.is_authenticated %}
+                <div>
+                    <a href="{% url 'fav' db.id %}" class="">Favoritar/Desfavoritar</a>
+                </div>
+            {% endif %}
+        </div>
+        <table class="table">
+                  <div class="descricao">
+                      {{db.descricao}}
+                  </div>
+                  <div class="linkOAShow">
+                      {{db.link}}
+                  </div>
+
+            <div>
+                <a href="/" class="btn btn-info">Voltar</a>
+            </div>
+            <div>
+                {% if request.user.is_authenticated %}
+                <a href="" class="btn btn-danger">Reportar Conteúdo</a>
+                {% for message in messages %}
+                <p id="messages" style="text-align: center">{{message}}</p>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </table>
+    </div>
+{% endblock content %}
